@@ -1,4 +1,4 @@
-# pybib
+# pybib [![PyPI version](https://img.shields.io/pypi/v/pybib.svg?style=flat)](https://pypi.python.org/pypi?:action=display&name=pybib)
 
 ## Installation
 
