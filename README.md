@@ -23,3 +23,7 @@ To use this script, install the package using `pip` with the following command:
 ```
 pip install --user pybib
 ```
+
+## Troubleshooting
+
+If you encounter problems using this program, please open an issue on this repository so I can rectify the problem.
