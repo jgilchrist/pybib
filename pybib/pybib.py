@@ -13,12 +13,12 @@ key_file_matcher = re.compile('(\w+)\s+(10\.\d{4}[\d\:\.\-\/a-z]+)')
 bibtex_key_matcher = re.compile('@\w+{(\w+),')
 
 
-def convert_file(filename, doi_database_url):
+def convert_file(filename, driver):
     """Convert a file in the format [citation_key doi_key]* into a valid bibtex file"""
 
     citation_key_to_doi = parse_file(filename)
 
-    citation_key_to_bib = get_all_bibliography_data(citation_key_to_doi, doi_database_url)
+    citation_key_to_bib = get_all_bibliography_data(citation_key_to_doi, driver)
 
     bibtex_lines = replace_citation_keys(citation_key_to_bib)
 
@@ -86,7 +86,7 @@ def parse_line(line_number, line):
 
     return citation_key, doi
 
-def get_all_bibliography_data(citation_key_to_doi, doi_database_url):
+def get_all_bibliography_data(citation_key_to_doi, driver):
     """Takes a dict in the format {citation_key: doi_key}* and expands each doi key into its bibliography text"""
 
     print("Retrieving bibliography data... ", end="")
@@ -94,37 +94,13 @@ def get_all_bibliography_data(citation_key_to_doi, doi_database_url):
     key_to_bibliography = {}
 
     for citation_key, doi in citation_key_to_doi.items():
-        bibliography_text = get_bibliography_text(doi, doi_database_url)
+        bibliography_text = driver.get_entry(doi)
 
         key_to_bibliography[citation_key] = bibliography_text
 
     print("Done")
 
     return key_to_bibliography
-
-def get_bibliography_text(doi, doi_database_url):
-    """Takes a single doi and retrieves the bibtex entry for the corresponding paper"""
-
-    full_url = doi_database_url + doi
-    headers = {'Accept': 'text/bibliography; style=bibtex'}
-
-    try:
-        r = requests.get(full_url, headers=headers)
-    except Exception as e:
-        sys.exit("Network connection failed: {}".format(e))
-    r.encoding = "utf-8"
-
-    if r.status_code == 200:
-        pass
-    elif r.status_code == 404:
-        sys.exit("Unknown doi key.")
-    else:
-        sys.exit("Unhandled http response code: {}".format(r.status_code))
-
-    bibliography_text = r.text
-    bibliography_text = bibliography_text.strip()
-
-    return bibliography_text
 
 
 def replace_citation_keys(key_to_bibliography):

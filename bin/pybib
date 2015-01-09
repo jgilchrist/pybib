@@ -4,13 +4,11 @@ import pybib
 
 import argparse
 
-# This website allows information about a paper to be retrieved by accessing
-# http://dx.doi.org/DOI
-doi_database_url = "http://dx.doi.org/"
+driver = pybib.drivers.DXDoi()
 
 parser = argparse.ArgumentParser(description='Turn a file of [cite-key: DOI]* into a valid bibtex file')
 parser.add_argument('file', type=str, help="The filename to parse")
 
 args = parser.parse_args()
 
-pybib.convert_file(args.file, doi_database_url)
+pybib.convert_file(args.file, driver)
