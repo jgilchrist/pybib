@@ -4,10 +4,10 @@ import sys
 import requests
 
 # Matches a valid DOI
-doi_matcher = re.compile('(10\.\d{4}[\d\:\.\-\/a-z]+)')
+doi_matcher = re.compile('\b(10[.][0-9]{4,}(?:[.][0-9]+)*/(?:(?!["&\'<>])\S)+)\b')
 
 # Matches a [citation_key DOI] pair
-key_file_matcher = re.compile('(\w+)\s+(10\.\d{4}[\d\:\.\-\/a-z]+)')
+key_file_matcher = re.compile('(\w+)\s+(\S+)')
 
 # Matches the beginning of a BibTeX entry
 bibtex_key_matcher = re.compile('@\w+{(\w+),')
