@@ -59,6 +59,9 @@ def parse_file(filename):
 
     print("Found {} citations in {}".format(len(doi_entries), filename))
 
+    if not doi_entries:
+        error("Nothing to do")
+
     return doi_entries
 
 def parse_line(line_number, line):
