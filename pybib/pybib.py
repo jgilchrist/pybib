@@ -7,7 +7,7 @@ import requests
 doi_matcher = re.compile('\b(10[.][0-9]{4,}(?:[.][0-9]+)*/(?:(?!["&\'<>])\S)+)\b')
 
 # Matches a [citation_key DOI] pair
-key_file_matcher = re.compile('(\w+)\s+(\S+)')
+key_file_matcher = re.compile('(\S+)\s+(\S+)')
 
 # Matches the beginning of a BibTeX entry
 bibtex_key_matcher = re.compile('@\w+{(\w+),')
