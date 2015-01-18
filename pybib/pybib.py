@@ -13,27 +13,38 @@ key_file_matcher = re.compile('(\w+)\s+(\S+)')
 bibtex_key_matcher = re.compile('@\w+{(\w+),')
 
 
-def convert_file(filename, driver):
+def convert_file(filename, driver, out_to_file, verbose):
     """Convert a file in the format [citation_key doi_key]* into a valid bibtex file"""
 
-    print("Retrieving entries from {}".format(driver.url))
+    if verbose:
+        print("Retrieving entries from {}".format(driver.url))
 
-    doi_entries = parse_file(filename)
+    doi_entries = parse_file(filename, verbose)
 
-    bib_entries = get_all_bibliography_data(doi_entries, driver)
+    bib_entries = get_all_bibliography_data(doi_entries, driver, verbose)
 
     bib_entries = replace_citation_keys(bib_entries)
 
+    writefn = write_to_file if out_to_file else write_to_stdout
+
+    writefn(bib_entries, filename, verbose)
+
+def write_to_file(entries, filename, verbose):
     (root, ext) = os.path.splitext(filename)
     bibtex_file = root + ".bib"
 
     with open(bibtex_file, 'w') as bib:
-        for citation in bib_entries:
+        for citation in entries:
             print(citation, file=bib)
 
-    print("Wrote generated BibTeX file as {}".format(bibtex_file))
+    if verbose:
+        print("Wrote generated BibTeX file as {}".format(bibtex_file))
 
-def parse_file(filename):
+def write_to_stdout(entries, filename, verbose):
+    for citation in entries:
+        print(citation)
+
+def parse_file(filename, verbose):
     """Parses a file in the format [citation_key doi_key]* into a dictionary {citation_key: doi_key}*"""
 
     doi_entries = {}
@@ -57,7 +68,8 @@ def parse_file(filename):
 
         doi_entries[citation_key] = doi
 
-    print("Found {} citations in {}".format(len(doi_entries), filename))
+    if verbose:
+        print("Found {} citations in {}".format(len(doi_entries), filename))
 
     if not doi_entries:
         error("Nothing to do")
@@ -85,22 +97,25 @@ def parse_line(line_number, line):
     if len(citation_key) > 20:
         error("Line {}: Citation key '{}' is over 20 characters".format(line_number, citation_key))
 
-    if not doi_matcher.match(doi):
-        error("Line {}: Invalid DOI '{}'".format(line_number, doi))
+    # if not doi_matcher.match(doi):
+        # error("Line {}: Invalid DOI {}".format(line_number, doi))
 
     return citation_key, doi
 
-def get_all_bibliography_data(doi_entries, driver):
+def get_all_bibliography_data(doi_entries, driver, verbose):
     """Takes a dict in the format {citation_key: doi_key}* and expands each doi key into its bibliography text"""
 
-    print("Retrieving bibliography entries:")
+    if verbose:
+        print("Retrieving bibliography entries:")
 
     key_to_bibliography = {}
 
     for citation_key, doi in doi_entries.items():
-        print("\t{} ({}) -> ".format(citation_key, doi), end="")
+        if verbose:
+            print("\t{} ({}) -> ".format(citation_key, doi), end="")
         bibliography_text = driver.get_entry(doi)
-        print("Done.")
+        if verbose:
+            print("Done.")
 
         key_to_bibliography[citation_key] = bibliography_text
 
