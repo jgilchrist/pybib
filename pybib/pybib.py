@@ -122,23 +122,21 @@ def replace_citation_keys(key_to_bibliography):
     """Single the bibtex entry comes with a default citation key, we need to replace
     this with the key specified in the file"""
 
-    bib_items = []
+    return [replace_key(entry, key) for (entry, key) in key_to_bibliography]
 
-    for citation_key in key_to_bibliography:
-        bib_text = key_to_bibliography[citation_key]
 
-        citation_key_match = bibtex_key_matcher.match(bib_text)
+def replace_key(entry, key):
+    citation_key_match = bibtex_key_matcher.match(entry)
 
-        if not citation_key_match:
-            error("Ill formatted bibtex entry:\n{}".format(bib_text))
+    if not citation_key_match:
+        error("Ill formatted bibtex entry:\n{}".format(bib_text))
 
-        old_key = citation_key_match.group(1)
+    old_key = citation_key_match.group(1)
 
-        new_bib = bib_text.replace(old_key, citation_key)
+    new_entry = entry.replace(old_key, key)
 
-        bib_items.append(new_bib)
+    return new_entry
 
-    return bib_items
 
 def error(msg):
     sys.exit(msg)
