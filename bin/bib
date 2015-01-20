@@ -12,7 +12,7 @@ def error(msg):
 driver = pybib.drivers.DXDoi()
 
 parser = argparse.ArgumentParser(description='Retrieve BibTeX information for a DOI')
-parser.add_argument('doi', type=str, help='The filename to parse')
+parser.add_argument('doi', type=str, help='The DOI to retrieve an entry for')
 
 args = parser.parse_args()
 
