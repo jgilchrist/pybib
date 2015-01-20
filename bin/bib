@@ -9,29 +9,13 @@ import sys
 def error(msg):
     sys.exit(msg)
 
-doi_matcher = re.compile('\b(10[.][0-9]{4,}(?:[.][0-9]+)*/(?:(?!["&\'<>])\S)+)\b')
-bibtex_key_matcher = re.compile('@\w+{(.+?),')
-
 driver = pybib.drivers.DXDoi()
 
 parser = argparse.ArgumentParser(description='Retrieve BibTeX information for a DOI')
-parser.add_argument('key', type=str, help='The name of the key')
 parser.add_argument('doi', type=str, help='The filename to parse')
 
 args = parser.parse_args()
 
-if not doi_matcher.match(args.doi):
-    error("Invalid doi: {}".format(args.doi))
-
 entry = driver.get_entry(args.doi)
-
-citation_key_match = bibtex_key_matcher.match(entry)
-
-if not citation_key_match:
-    error("Ill formatted bibtex entry:\n{}".format(entry))
-
-old_key = citation_key_match.group(1)
-
-entry = entry.replace(old_key, args.key)
 
 print(entry)
