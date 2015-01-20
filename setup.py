@@ -9,4 +9,4 @@ setup(name='pybib',
       install_requires=[
           'requests',
       ],
-      scripts=['bin/pybib'])
+      scripts=['bin/bib', 'bin/pybib'])
