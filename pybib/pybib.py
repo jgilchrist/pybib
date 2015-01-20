@@ -93,12 +93,8 @@ def parse_line(line_number, line):
 
     citation_key, doi = parsed_line.group(1, 2)
 
-    # Limit the length of citation keys
-    if len(citation_key) > 20:
-        error("Line {}: Citation key '{}' is over 20 characters".format(line_number, citation_key))
-
-    # if not doi_matcher.match(doi):
-        # error("Line {}: Invalid DOI {}".format(line_number, doi))
+    if not doi_matcher.match(doi):
+        error("Line {}: Invalid DOI {}".format(line_number, doi))
 
     return citation_key, doi
 
