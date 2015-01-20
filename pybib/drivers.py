@@ -30,7 +30,7 @@ class DXDoi(Driver):
 
     def get_api_url(self, doi):
         url = self.url + doi
-        headers = {'Accept': 'text/bibliography; style=bibtex'}
+        headers = {'Accept': 'application/x-bibtex; charset=utf-8'}
 
         return (url, headers)
 
