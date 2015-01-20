@@ -10,7 +10,7 @@ doi_matcher = re.compile('\b(10[.][0-9]{4,}(?:[.][0-9]+)*/(?:(?!["&\'<>])\S)+)\b
 key_file_matcher = re.compile('(\S+)\s+(\S+)')
 
 # Matches the beginning of a BibTeX entry
-bibtex_key_matcher = re.compile('@\w+{(\w+),')
+bibtex_key_matcher = re.compile('@\w+{(.+?),')
 
 
 def convert_file(filename, driver, out_to_file, verbose):
