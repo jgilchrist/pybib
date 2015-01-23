@@ -3,11 +3,6 @@
 import pybib
 
 import argparse
-import re
-import sys
-
-def error(msg):
-    sys.exit(msg)
 
 driver = pybib.drivers.DXDoi()
 
