@@ -1,3 +1,4 @@
+import logging
 import re
 import os
 import sys
@@ -13,23 +14,22 @@ key_file_matcher = re.compile('(\S+)\s+(\S+)')
 bibtex_key_matcher = re.compile('@\w+{(.+?),')
 
 
-def convert_file(filename, driver, out_to_file, verbose):
+def convert_file(filename, driver, out_to_file):
     """Convert a file in the format [citation_key doi_key]* into a valid bibtex file"""
 
-    if verbose:
-        print("Retrieving entries from {}".format(driver.url))
+    logging.info("Retrieving entries from {}".format(driver.url))
 
-    doi_entries = parse_file(filename, verbose)
+    doi_entries = parse_file(filename)
 
-    bib_entries = get_all_bibliography_data(doi_entries, driver, verbose)
+    bib_entries = get_all_bibliography_data(doi_entries, driver)
 
     bib_entries = replace_citation_keys(bib_entries)
 
     writefn = write_to_file if out_to_file else write_to_stdout
 
-    writefn(bib_entries, filename, verbose)
+    writefn(bib_entries, filename)
 
-def write_to_file(entries, filename, verbose):
+def write_to_file(entries, filename):
     (root, ext) = os.path.splitext(filename)
     bibtex_file = root + ".bib"
 
@@ -37,14 +37,13 @@ def write_to_file(entries, filename, verbose):
         for citation in entries:
             print(citation, file=bib)
 
-    if verbose:
-        print("Wrote generated BibTeX file as {}".format(bibtex_file))
+    logging.info("Wrote generated BibTeX file as {}".format(bibtex_file))
 
-def write_to_stdout(entries, filename, verbose):
+def write_to_stdout(entries, filename):
     for citation in entries:
         print(citation)
 
-def parse_file(filename, verbose):
+def parse_file(filename):
     """Parses a file in the format [citation_key doi_key]* into a dictionary {citation_key: doi_key}*"""
 
     doi_entries = {}
@@ -53,7 +52,7 @@ def parse_file(filename, verbose):
         with open(filename) as f:
             lines = f.readlines()
     except FileNotFoundError as e:
-        error('{}'.format(e))
+        error('File not found: {}'.format(e.filename))
 
     for i, line in enumerate(lines, start=1):
 
@@ -71,8 +70,7 @@ def parse_file(filename, verbose):
 
         doi_entries[citation_key] = doi
 
-    if verbose:
-        print("Found {} citations in {}".format(len(doi_entries), filename))
+    logging.info("Found {} citations in {}".format(len(doi_entries), filename))
 
     if not doi_entries:
         error("Nothing to do")
@@ -101,20 +99,17 @@ def parse_line(line_number, line):
 
     return citation_key, doi
 
-def get_all_bibliography_data(doi_entries, driver, verbose):
+def get_all_bibliography_data(doi_entries, driver):
     """Takes a dict in the format {citation_key: doi_key}* and expands each doi key into its bibliography text"""
 
-    if verbose:
-        print("Retrieving bibliography entries:")
+    logging.info("Retrieving bibliography entries:")
 
     key_to_bibliography = {}
 
     for citation_key, doi in doi_entries.items():
-        if verbose:
-            print("\t{} ({}) -> ".format(citation_key, doi), end="")
+        logging.info("\t{} ({}) -> ".format(citation_key, doi), end="")
         bibliography_text = driver.get_entry(doi)
-        if verbose:
-            print("Done.")
+        logging.info("Done.")
 
         key_to_bibliography[citation_key] = bibliography_text
 

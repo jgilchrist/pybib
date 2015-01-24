@@ -3,8 +3,7 @@
 import pybib
 
 import argparse
-
-driver = pybib.drivers.DXDoi()
+import logging
 
 parser = argparse.ArgumentParser(description='Retrieve BibTeX information for Digital Object Identifiers (DOIs)')
 parser.add_argument('-o', '--out', type=str, help='The filename to write the entries to')
@@ -15,11 +14,17 @@ g.add_argument('DOI', nargs='?', type=str, help='Retrieve an entry for a DOI')
 g.add_argument('-f', '--file', nargs='?', type=str, help='Retrieve entries from a file of DOIs')
 
 args = parser.parse_args()
-
 verbose = args.verbose or args.out
+
+logging.basicConfig(
+    format='%(message)s',
+    level=logging.INFO if verbose else logging.CRITICAL
+)
+
+driver = pybib.drivers.DXDoi()
 
 if args.DOI:
     entry = driver.get_entry(args.DOI)
     print(entry)
 elif args.file:
-    pybib.convert_file(args.file, driver, args.out, verbose)
+    pybib.convert_file(args.file, driver, args.out)
