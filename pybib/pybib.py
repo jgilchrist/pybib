@@ -49,8 +49,11 @@ def parse_file(filename, verbose):
 
     doi_entries = {}
 
-    with open(filename) as f:
-        lines = f.readlines()
+    try:
+        with open(filename) as f:
+            lines = f.readlines()
+    except FileNotFoundError as e:
+        error('{}'.format(e))
 
     for i, line in enumerate(lines, start=1):
 
