@@ -6,11 +6,20 @@ import argparse
 
 driver = pybib.drivers.DXDoi()
 
-parser = argparse.ArgumentParser(description='Retrieve BibTeX information for a DOI')
-parser.add_argument('doi', type=str, help='The DOI to retrieve an entry for')
+parser = argparse.ArgumentParser(description='Retrieve BibTeX information for Digital Object Identifiers (DOIs)')
+parser.add_argument('-o', '--out', type=str, help='The filename to write the entries to')
+parser.add_argument('-v', '--verbose', action='store_true', help='Print information while retrieving entries')
+
+g = parser.add_mutually_exclusive_group(required=True)
+g.add_argument('DOI', nargs='?', type=str, help='Retrieve an entry for a DOI')
+g.add_argument('-f', '--file', nargs='?', type=str, help='Retrieve entries from a file of DOIs')
 
 args = parser.parse_args()
 
-entry = driver.get_entry(args.doi)
+verbose = args.verbose or args.out
 
-print(entry)
+if args.DOI:
+    entry = driver.get_entry(args.DOI)
+    print(entry)
+elif args.file:
+    pybib.convert_file(args.file, driver, args.out, verbose)
