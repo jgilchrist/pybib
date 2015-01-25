@@ -6,6 +6,7 @@ import argparse
 import logging
 
 parser = argparse.ArgumentParser(description='Retrieve BibTeX information for Digital Object Identifiers (DOIs)')
+
 parser.add_argument('-o', '--out', type=str, help='The filename to write the entries to')
 parser.add_argument('-v', '--verbose', action='store_true', help='Print information while retrieving entries')
 
