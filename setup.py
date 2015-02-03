@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='pybib',
-      version='1.1',
+      version='1.2',
       description='Auto-generate a BibTeX file from a list of Digital Object Identifiers',
       url='https://github.com/jgilchrist/pybib',
       author='Jonny Gilchrist',
