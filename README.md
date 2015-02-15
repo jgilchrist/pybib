@@ -5,7 +5,7 @@
 To use this script, install the package using `pip` with the following command:
 
 ```sh
-$ pip install --user pybib
+$ pip3 install --user pybib
 ```
 
 ## Usage
