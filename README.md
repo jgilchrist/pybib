@@ -8,6 +8,8 @@ To use this script, install the package using `pip` with the following command:
 $ pip3 install --user pybib
 ```
 
+For user-only installs, pip installs scripts to the directory `~/.local/bin`, so make sure it's in your path.
+
 ## Usage examples
 
 Retrieve a single citation:
