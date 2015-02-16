@@ -1,8 +1,10 @@
 # pybib [![PyPI version](https://img.shields.io/pypi/v/pybib.svg?style=flat)](https://pypi.python.org/pypi?:action=display&name=pybib)
 
+pybib is a super-easy way to get citations for your LaTeX document. Instead of typing out BibTeX entries yourself, just give pybib the Digital Object Identifier (DOI) of the resource you want to cite and it will get all the information for you. Then, you can just add the citation it gives you to your BibTeX file. Easy!
+
 ## Installation
 
-To use this script, install the package using `pip` with the following command:
+This package is available on PyPi and can be installed with the following command:
 
 ```sh
 $ pip3 install --user pybib
@@ -12,7 +14,7 @@ For user-only installs, pip installs scripts to the directory `~/.local/bin`, so
 
 ## Usage examples
 
-Retrieve a single citation:
+Get a citation:
 
 ```sh
 $ bib 10.1112/plms/s2-42.1.230
@@ -32,13 +34,13 @@ $ bib 10.1112/plms/s2-42.1.230
 }
 ```
 
-Retrieve a single citation and add it to a bibliography file:
+Get a citation and add it to your bibliography file:
 
 ```sh
 $ bib 10.1145/159544.159617 >> citations.bib
 ```
 
-Retrieve a single citation and add it to a bibliography file, running it through `bibtool` first to format the entry and auto-generate a citation key:
+Get a citation and add it to your bibliography file, running it through `bibtool` first to format the entry and auto-generate a citation key:
 
 ```sh
 $ bib 10.1145/159544.159617 | bibtool >> citations.bib
@@ -46,7 +48,7 @@ $ bib 10.1145/159544.159617 | bibtool >> citations.bib
 
 Convert a file containing a list of DOIs into a bibliography file:
 
-```
+```sh
 $ bib -f citations.doi
 ```
 
