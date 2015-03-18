@@ -5,7 +5,11 @@ import pybib
 import argparse
 import logging
 
+VERSION = '1.2.1'
+
 parser = argparse.ArgumentParser(description='Retrieve BibTeX information for Digital Object Identifiers (DOIs)')
+
+parser.add_argument('--version', action='version', version=VERSION)
 
 parser.add_argument('-o', '--out', type=str, help='The filename to write the entries to')
 parser.add_argument('-v', '--verbose', action='store_true', help='Print information while retrieving entries')
