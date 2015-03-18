@@ -7,7 +7,7 @@ import logging
 
 from pybib.drivers import DriverResult
 
-VERSION = '1.2.1'
+VERSION = '1.2.2'
 
 parser = argparse.ArgumentParser(description='Retrieve BibTeX information for Digital Object Identifiers (DOIs)')
 
