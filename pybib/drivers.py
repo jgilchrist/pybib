@@ -1,6 +1,13 @@
 import sys
 import requests
 
+from enum import Enum
+
+class DriverResult(Enum):
+    success = 1,
+    unknown = 2,
+    other = 3,
+
 class Driver:
 
     def get_entry(self, doi):
@@ -12,13 +19,13 @@ class Driver:
         if r.status_code == 200:
             pass
         elif r.status_code == 404:
-            sys.exit("Unknown doi key.")
+            return (DriverResult.unknown, None)
         else:
             sys.exit("Unhandled http response code: {}".format(r.status_code))
 
         entry = r.text.strip()
 
-        return entry
+        return (DriverResult.success, entry)
 
 
 class DXDoi(Driver):

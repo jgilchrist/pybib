@@ -4,8 +4,7 @@ import os
 import sys
 import requests
 
-# Matches a valid DOI
-doi_matcher = re.compile('\b(10[.][0-9]{4,}(?:[.][0-9]+)*/(?:(?!["&\'<>])\S)+)\b')
+from .drivers import DriverResult
 
 # Matches a [citation_key DOI] pair
 key_file_matcher = re.compile('(\S+)\s+(\S+)')
@@ -27,11 +26,10 @@ def convert_file(filename, driver, out_to_file):
 
     writefn = write_to_file if out_to_file else write_to_stdout
 
-    writefn(bib_entries, filename)
+    writefn(bib_entries, filename, out_to_file)
 
-def write_to_file(entries, filename):
-    (root, ext) = os.path.splitext(filename)
-    bibtex_file = root + ".bib"
+def write_to_file(entries, filename, out_to_file):
+    bibtex_file = out_to_file
 
     with open(bibtex_file, 'w') as bib:
         for citation in entries:
@@ -39,7 +37,7 @@ def write_to_file(entries, filename):
 
     logging.info("Wrote generated BibTeX file as {}".format(bibtex_file))
 
-def write_to_stdout(entries, filename):
+def write_to_stdout(entries, filename, out_to_file):
     for citation in entries:
         print(citation)
 
@@ -94,9 +92,6 @@ def parse_line(line_number, line):
 
     citation_key, doi = parsed_line.group(1, 2)
 
-    if not doi_matcher.match(doi):
-        error("Line {}: Invalid DOI {}".format(line_number, doi))
-
     return citation_key, doi
 
 def get_all_bibliography_data(doi_entries, driver):
@@ -107,8 +102,15 @@ def get_all_bibliography_data(doi_entries, driver):
     key_to_bibliography = {}
 
     for citation_key, doi in doi_entries.items():
-        logging.info("\t{} ({}) -> ".format(citation_key, doi), end="")
-        bibliography_text = driver.get_entry(doi)
+        logging.info("\t{} -> ({})".format(citation_key, doi, end=""))
+        (status, output) = driver.get_entry(doi)
+
+        if status == DriverResult.unknown:
+            print('Unknown DOI with citation key "{}": {}'.format(citation_key, doi))
+            sys.exit(1)
+
+        bibliography_text = output
+
         logging.info("Done.")
 
         key_to_bibliography[citation_key] = bibliography_text
@@ -120,14 +122,14 @@ def replace_citation_keys(key_to_bibliography):
     """Single the bibtex entry comes with a default citation key, we need to replace
     this with the key specified in the file"""
 
-    return [replace_key(entry, key) for (entry, key) in key_to_bibliography]
+    return [replace_key(key, entry) for (key, entry) in key_to_bibliography.items()]
 
 
-def replace_key(entry, key):
+def replace_key(key, entry):
     citation_key_match = bibtex_key_matcher.match(entry)
 
     if not citation_key_match:
-        error("Ill formatted bibtex entry:\n{}".format(bib_text))
+        error("Ill formatted bibtex entry:\n{}".format(entry))
 
     old_key = citation_key_match.group(1)
 

@@ -5,6 +5,8 @@ import pybib
 import argparse
 import logging
 
+from pybib.drivers import DriverResult
+
 VERSION = '1.2.1'
 
 parser = argparse.ArgumentParser(description='Retrieve BibTeX information for Digital Object Identifiers (DOIs)')
@@ -29,7 +31,13 @@ logging.basicConfig(
 driver = pybib.drivers.DXDoi()
 
 if args.DOI:
-    entry = driver.get_entry(args.DOI)
-    print(entry)
+    (result, output) = driver.get_entry(args.DOI)
+
+    if result == DriverResult.success:
+        entry = output
+        print(entry)
+    elif result == DriverResult.unknown:
+        print('Unknown DOI')
+
 elif args.file:
     pybib.convert_file(args.file, driver, args.out)
