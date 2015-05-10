@@ -4,13 +4,13 @@ pybib is a super-easy way to get citations for your LaTeX document. Instead of t
 
 ## Installation
 
-This package is available on PyPi and can be installed with the following command:
+The package is available on PyPi and can be installed with the following command:
 
 ```sh
 $ pip3 install --user pybib
 ```
 
-For user-only installs, pip installs scripts to the directory `~/.local/bin`, so make sure it's in your path.
+For user-only installs, pip installs scripts to the directory `~/.local/bin`, so make sure it's in your path. If you would prefer to install it system-wide, just leave out the `--user` flag.
 
 ## Usage examples
 
@@ -54,4 +54,4 @@ $ bib -f citations.doi
 
 ## Troubleshooting
 
-If you encounter problems using this program, please open an issue on this repository so I can rectify the problem.
+If you encounter any problems, please open an issue so I can rectify them as soon as possible.
