@@ -11,33 +11,18 @@ VERSION = '1.2.2'
 
 parser = argparse.ArgumentParser(description='Retrieve BibTeX information for Digital Object Identifiers (DOIs)')
 
+parser.add_argument('DOI', type=str, help='Retrieve an entry for a DOI')
 parser.add_argument('--version', action='version', version=VERSION)
-
-parser.add_argument('-o', '--out', type=str, help='The filename to write the entries to')
 parser.add_argument('-v', '--verbose', action='store_true', help='Print information while retrieving entries')
 
-g = parser.add_mutually_exclusive_group(required=True)
-g.add_argument('DOI', nargs='?', type=str, help='Retrieve an entry for a DOI')
-g.add_argument('-f', '--file', nargs='?', type=str, help='Retrieve entries from a file of DOIs')
-
 args = parser.parse_args()
-verbose = args.verbose or args.out
-
-logging.basicConfig(
-    format='%(message)s',
-    level=logging.INFO if verbose else logging.CRITICAL
-)
 
 driver = pybib.drivers.DXDoi()
 
-if args.DOI:
-    (result, output) = driver.get_entry(args.DOI)
+(result, output) = driver.get_entry(args.DOI)
 
-    if result == DriverResult.success:
-        entry = output
-        print(entry)
-    elif result == DriverResult.unknown:
-        print('Unknown DOI')
-
-elif args.file:
-    pybib.convert_file(args.file, driver, args.out)
+if result == DriverResult.success:
+    entry = output
+    print(entry)
+elif result == DriverResult.unknown:
+    exit('Unknown DOI')
