@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(name='pybib',
       version='1.2.2',
-      description='Auto-generate a BibTeX file from a list of Digital Object Identifiers',
+      description='Fetch citation information, given a Digital Object Identifier',
       url='https://github.com/jgilchrist/pybib',
       author='Jonny Gilchrist',
       packages=['pybib'],

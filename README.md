@@ -18,20 +18,6 @@ Get a citation:
 
 ```sh
 $ bib 10.1112/plms/s2-42.1.230
-
-@article{Turing_1937,
-    doi = {10.1112/plms/s2-42.1.230},
-    url = {http://dx.doi.org/10.1112/plms/s2-42.1.230},
-    year = 1937,
-    month = {jan},
-    publisher = {Oxford University Press ({OUP})},
-    volume = {s2-42},
-    number = {1},
-    pages = {230--265},
-    author = {A. M. Turing},
-    title = {On Computable Numbers, with an Application to the Entscheidungsproblem},
-    journal = {Proceedings of the London Mathematical Society}
-}
 ```
 
 Get a citation and add it to your bibliography file:
@@ -44,12 +30,6 @@ Get a citation and add it to your bibliography file, running it through `bibtool
 
 ```sh
 $ bib 10.1145/159544.159617 | bibtool >> citations.bib
-```
-
-Convert a file containing a list of DOIs into a bibliography file:
-
-```sh
-$ bib -f citations.doi
 ```
 
 ## Troubleshooting
