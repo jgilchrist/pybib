@@ -1,28 +1,71 @@
 #!/usr/bin/env python3
 
-import pybib
-
 import argparse
 import logging
-
-from pybib.drivers import DriverResult
+import requests
+import json
 
 VERSION = '1.3.0'
 
-parser = argparse.ArgumentParser(description='Retrieve BibTeX information for Digital Object Identifiers (DOIs)')
+DXDOI_URL = "http://dx.doi.org/{}"
+CROSSREF_URL = "http://api.crossref.org/{}"
 
-parser.add_argument('DOI', type=str, help='Retrieve an entry for a DOI')
+def search(query):
+    url = CROSSREF_URL.format("works")
+    payload = {'query': query}
+
+    r = requests.get(url, params=payload)
+    r.encoding = "utf-8"
+
+    if r.status_code == 200:
+        pass
+    elif r.status_code == 404:
+        exit('Unknown search term')
+    else:
+        sys.exit("Unhandled http response code: {}".format(r.status_code))
+
+    results = r.json()
+    results = results["message"]["items"]
+
+    for result in results:
+        print("{} ({})".format(result["title"][0], result["DOI"]))
+
+def get(args):
+    url = DXDOI_URL.format(doi)
+    headers = {'Accept': 'application/x-bibtex; charset=utf-8'}
+
+    r = requests.get(url, headers=headers)
+    r.encoding = "utf-8"
+
+    if r.status_code == 200:
+        pass
+    elif r.status_code == 404:
+        exit('Unknown DOI')
+    else:
+        sys.exit("Unhandled http response code: {}".format(r.status_code))
+
+    entry = r.text.strip()
+
+    print(entry)
+
+parser = argparse.ArgumentParser(description='Retrieve BibTeX information for Digital Object Identifiers (DOIs)')
 parser.add_argument('--version', action='version', version=VERSION)
-parser.add_argument('-v', '--verbose', action='store_true', help='Print information while retrieving entries')
+parser.set_defaults(cmd=None)
+
+subparsers = parser.add_subparsers()
+
+get_parser = subparsers.add_parser('get', help='Retrieve an entry for a DOI')
+get_parser.add_argument('DOI', type=str, help='The DOI to get')
+get_parser.set_defaults(cmd=get)
+
+search_parser = subparsers.add_parser('search', help='Search for the DOI of a resource')
+search_parser.add_argument('query', type=str, help='The query string')
+search_parser.set_defaults(cmd=search)
 
 args = parser.parse_args()
 
-driver = pybib.drivers.DXDoi()
+if not args.cmd:
+    parser.print_help()
+    exit(1)
 
-(result, output) = driver.get_entry(args.DOI)
-
-if result == DriverResult.success:
-    entry = output
-    print(entry)
-elif result == DriverResult.unknown:
-    exit('Unknown DOI')
+args.cmd(args)
