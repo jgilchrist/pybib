@@ -69,8 +69,8 @@ def search_cmd(args):
     query = " ".join(args.query)
     results = search(query)
 
-    if args.n:
-        idx = args.n[0]
+    if args.get:
+        idx = args.get[0]
         result = results[idx]
         doi = result["DOI"]
         entry = get_bibtex(doi)
@@ -106,7 +106,7 @@ get_parser.set_defaults(cmd=get_cmd)
 
 search_parser = subparsers.add_parser('search', help='Search for the DOI of a resource')
 search_parser.add_argument('query', nargs='+', help='The query string')
-search_parser.add_argument('-n', nargs=1, type=int, help='The index of the bibliography information to get')
+search_parser.add_argument('-g', '--get', nargs=1, type=int, help='The index of the bibliography information to get')
 search_parser.set_defaults(cmd=search_cmd)
 
 args = parser.parse_args()
