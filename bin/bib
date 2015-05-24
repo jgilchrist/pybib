@@ -5,6 +5,11 @@ import logging
 import requests
 import json
 
+import termstyle
+from termstyle import cyan
+
+termstyle.auto()
+
 VERSION = '1.3.0'
 
 DXDOI_URL = "http://dx.doi.org/{}"

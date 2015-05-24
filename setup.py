@@ -8,5 +8,6 @@ setup(name='pybib',
       packages=['pybib'],
       install_requires=[
           'requests',
+          'python-termstyle',
       ],
       scripts=['bin/bib'])
