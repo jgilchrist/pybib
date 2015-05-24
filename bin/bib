@@ -10,39 +10,68 @@ VERSION = '1.3.0'
 DXDOI_URL = "http://dx.doi.org/{}"
 CROSSREF_URL = "http://api.crossref.org/{}"
 
-def search(query):
+def handle_status_code(r):
+    if r.status_code == 200:
+        return
+    elif r.status_code == 404:
+        exit('Unknown')
+    else:
+        sys.exit("Unhandled http response code: {}".format(r.status_code))
+
+def make_author_list(authors):
+
+    author_list = []
+
+    if not authors:
+        return "Anonymous"
+
+    for author in authors:
+        given_name = author.get("given", "")
+        family_name = author.get("family", "")
+
+        if given_name:
+            # Only include the first letter of the author's given name
+            given_name = "{}.".format(given_name[0])
+
+        full_name = " ".join([given_name, family_name])
+        author_list.append(full_name)
+
+    return ', '.join(author_list)
+
+def search(args):
+    query = " ".join(args.query)
+
     url = CROSSREF_URL.format("works")
     payload = {'query': query}
 
     r = requests.get(url, params=payload)
     r.encoding = "utf-8"
 
-    if r.status_code == 200:
-        pass
-    elif r.status_code == 404:
-        exit('Unknown search term')
-    else:
-        sys.exit("Unhandled http response code: {}".format(r.status_code))
+    handle_status_code(r)
 
     results = r.json()
     results = results["message"]["items"]
 
-    for result in results:
-        print("{} ({})".format(result["title"][0], result["DOI"]))
+    for i, result in enumerate(results):
+        title = result.get("title")
+        doi = result.get("DOI")
+        author = result.get("author")
+
+        if not title:
+            continue
+
+        author_list = make_author_list(author)
+
+        print("{}. {} - {} <{}>".format(i, title[0], author_list, doi))
 
 def get(args):
-    url = DXDOI_URL.format(doi)
+    url = DXDOI_URL.format(args.DOI)
     headers = {'Accept': 'application/x-bibtex; charset=utf-8'}
 
     r = requests.get(url, headers=headers)
     r.encoding = "utf-8"
 
-    if r.status_code == 200:
-        pass
-    elif r.status_code == 404:
-        exit('Unknown DOI')
-    else:
-        sys.exit("Unhandled http response code: {}".format(r.status_code))
+    handle_status_code(r)
 
     entry = r.text.strip()
 
@@ -59,7 +88,7 @@ get_parser.add_argument('DOI', type=str, help='The DOI to get')
 get_parser.set_defaults(cmd=get)
 
 search_parser = subparsers.add_parser('search', help='Search for the DOI of a resource')
-search_parser.add_argument('query', type=str, help='The query string')
+search_parser.add_argument('query', nargs='+', help='The query string')
 search_parser.set_defaults(cmd=search)
 
 args = parser.parse_args()
