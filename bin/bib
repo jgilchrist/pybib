@@ -38,9 +38,7 @@ def make_author_list(authors):
 
     return ', '.join(author_list)
 
-def search(args):
-    query = " ".join(args.query)
-
+def search(query):
     url = CROSSREF_URL.format("works")
     payload = {'query': query}
 
@@ -51,6 +49,33 @@ def search(args):
 
     results = r.json()
     results = results["message"]["items"]
+    return results
+
+def get_bibtex(doi):
+    url = DXDOI_URL.format(doi)
+    headers = {'Accept': 'application/x-bibtex; charset=utf-8'}
+
+    r = requests.get(url, headers=headers)
+    r.encoding = "utf-8"
+
+    handle_status_code(r)
+
+    entry = r.text.strip()
+    return entry
+
+
+
+def search_cmd(args):
+    query = " ".join(args.query)
+    results = search(query)
+
+    if args.n:
+        idx = args.n[0]
+        result = results[idx]
+        doi = result["DOI"]
+        entry = get_bibtex(doi)
+        print(entry)
+        return
 
     for i, result in enumerate(results):
         title = result.get("title")
@@ -64,16 +89,8 @@ def search(args):
 
         print("{}. {} - {} <{}>".format(i, title[0], author_list, doi))
 
-def get(args):
-    url = DXDOI_URL.format(args.DOI)
-    headers = {'Accept': 'application/x-bibtex; charset=utf-8'}
-
-    r = requests.get(url, headers=headers)
-    r.encoding = "utf-8"
-
-    handle_status_code(r)
-
-    entry = r.text.strip()
+def get_cmd(args):
+    entry = get_bibtex(args.DOI)
 
     print(entry)
 
@@ -85,11 +102,12 @@ subparsers = parser.add_subparsers()
 
 get_parser = subparsers.add_parser('get', help='Retrieve an entry for a DOI')
 get_parser.add_argument('DOI', type=str, help='The DOI to get')
-get_parser.set_defaults(cmd=get)
+get_parser.set_defaults(cmd=get_cmd)
 
 search_parser = subparsers.add_parser('search', help='Search for the DOI of a resource')
 search_parser.add_argument('query', nargs='+', help='The query string')
-search_parser.set_defaults(cmd=search)
+search_parser.add_argument('-n', nargs=1, type=int, help='The index of the bibliography information to get')
+search_parser.set_defaults(cmd=search_cmd)
 
 args = parser.parse_args()
 
