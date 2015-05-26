@@ -14,22 +14,38 @@ For user-only installs, pip installs scripts to the directory `~/.local/bin`, so
 
 ## Usage examples
 
+### Retrieving citations
+
 Get a citation:
 
 ```sh
-$ bib 10.1112/plms/s2-42.1.230
+$ bib get 10.1112/plms/s2-42.1.230
 ```
 
 Get a citation and add it to your bibliography file:
 
 ```sh
-$ bib 10.1145/159544.159617 >> citations.bib
+$ bib get 10.1145/159544.159617 >> citations.bib
 ```
 
 Get a citation and add it to your bibliography file, running it through `bibtool` first to format the entry and auto-generate a citation key:
 
 ```sh
-$ bib 10.1145/159544.159617 | bibtool >> citations.bib
+$ bib get 10.1145/159544.159617 | bibtool >> citations.bib
+```
+
+### Searching
+
+Search for a resource:
+
+```sh
+$ bib search name of the resource
+```
+
+Get the citation for search result number `N`:
+
+```sh
+$ bib search name of the resource --get N
 ```
 
 ## Troubleshooting
