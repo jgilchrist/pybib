@@ -7,8 +7,6 @@ import json
 import termstyle
 from termstyle import cyan, green, magenta
 
-VERSION = '1.3.0'
-
 GET_URL = "http://dx.doi.org/{}"
 SEARCH_URL = "http://api.crossref.org/works"
 
@@ -99,7 +97,7 @@ def get_cmd(args):
 termstyle.auto()
 
 parser = argparse.ArgumentParser(description='Retrieve BibTeX information for Digital Object Identifiers (DOIs)')
-parser.add_argument('--version', action='version', version=VERSION)
+parser.add_argument('--version', action='version', version=pybib.__version__)
 parser.set_defaults(cmd=None)
 
 subparsers = parser.add_subparsers()

@@ -1,7 +1,9 @@
 from setuptools import setup
 
+from pybib import __version__
+
 setup(name='pybib',
-      version='1.3.0',
+      version=__version__,
       description='Fetch citation information, given a Digital Object Identifier',
       url='https://github.com/jgilchrist/pybib',
       author='Jonny Gilchrist',
