@@ -1,13 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
-import requests
-import json
-
 import pybib
-
-import termstyle
-from termstyle import cyan, green, magenta
 
 def search_cmd(args):
     query = " ".join(args.query)
@@ -22,25 +16,15 @@ def search_cmd(args):
         return
 
     for i, result in enumerate(results):
-        title = result.get("title")
-        doi = result.get("DOI")
-        author = result.get("author")
+        formatted_result = pybib.format(result)
+        print('{}. {}'.format(i, formatted_result))
 
-        if not title:
-            continue
-
-        author_list = pybib.make_author_list(author)
-
-        print("{}. {} - {} <{}>".format(magenta(i), title[0], green(author_list), cyan(doi)))
 
 def get_cmd(args):
     entry = pybib.get_bibtex(args.DOI)
 
     print(entry)
 
-
-# Automatically disable output colors if the output is not a terminal
-termstyle.auto()
 
 parser = argparse.ArgumentParser(description='Retrieve BibTeX information for Digital Object Identifiers (DOIs)')
 parser.add_argument('--version', action='version', version=pybib.__version__)

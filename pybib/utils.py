@@ -12,26 +12,6 @@ def handle_status_code(r):
     else:
         sys.exit("Unhandled http response code: {}".format(r.status_code))
 
-def make_author_list(authors):
-
-    author_list = []
-
-    if not authors:
-        return "Anonymous"
-
-    for author in authors:
-        given_name = author.get("given", "")
-        family_name = author.get("family", "")
-
-        if given_name:
-            # Only include the first letter of the author's given name
-            given_name = "{}.".format(given_name[0])
-
-        full_name = " ".join([given_name, family_name])
-        author_list.append(full_name)
-
-    return ', '.join(author_list)
-
 def search(query):
     payload = {'query': query}
 
