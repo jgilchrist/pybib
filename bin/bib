@@ -7,6 +7,9 @@ def search_cmd(args):
     query = " ".join(args.query)
     results = pybib.search(query)
 
+    # Only get the first 10 results
+    results = results[:10]
+
     if args.get:
         idx = args.get[0]
         result = results[idx]
