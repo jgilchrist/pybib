@@ -18,7 +18,7 @@ Parts = namedtuple('Parts', ['type', 'title', 'authors', 'date', 'container', 'e
 Formatter = namedtuple('Formatter', ['name', 'func'])
 
 # The template controls the structure of the output from the tool when searching
-template = '[{parts.type}]\n\t"{parts.title}", {parts.authors} {parts.extra} ({parts.date})\n\t{parts.doi}'
+template = '{parts.title}\n\t{parts.authors}{parts.extra} ({parts.date}) [{parts.type}], \n\t{parts.doi}'
 
 
 def color_parts(parts):
