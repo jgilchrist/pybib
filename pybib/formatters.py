@@ -34,7 +34,10 @@ def get_common_parts(r):
     """Gets citation parts which are common to all types of citation"""
 
     def format_title(title):
-        return title[0]
+        try:
+            return title[0]
+        except IndexError:
+            return "No Title"
 
     def format_author_list(authors):
         author_list = []
