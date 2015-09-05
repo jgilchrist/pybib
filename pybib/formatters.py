@@ -2,6 +2,7 @@ from __future__ import print_function
 
 import pprint
 import sys
+import logging
 
 from collections import namedtuple
 
@@ -125,7 +126,7 @@ def format_standard(r, parts):
     return ''
 
 def format_unknown(r, parts):
-    print(red('Unknown type: "%s"' % r.get('type')), file=sys.stderr)
+    logging.error(red('Unknown type: "%s"' % r.get('type')))
     return ''
 
 
