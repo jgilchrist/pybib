@@ -11,7 +11,7 @@ install:
     - pip install coveralls
     - pip install rednose
 
-script: nosetests --with-coverage --cover-package=pybib --cover-branches --rednose
+script: nosetests --with-coverage --cover-package=pybib --cover-branches --rednose tests
 
 after_success:
     coveralls
