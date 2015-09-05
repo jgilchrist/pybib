@@ -10,7 +10,7 @@ def handle_status_code(r):
     elif r.status_code == 404:
         exit('Unknown')
     else:
-        sys.exit("Unhandled http response code: {}".format(r.status_code))
+        exit("Unhandled http response code: {}".format(r.status_code))
 
 def search(query):
     payload = {'query': query}
