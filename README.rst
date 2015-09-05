@@ -1,5 +1,5 @@
-pybib |PyPI version|
-====================
+pybib |PyPI version| |Code Climate|
+===================================
 
 pybib is a super-easy way to get citations for your LaTeX document.
 Instead of typing out BibTeX entries yourself, just give pybib the
@@ -66,3 +66,6 @@ them as soon as possible.
 
 .. |PyPI version| image:: https://img.shields.io/pypi/v/pybib.svg?style=flat
    :target: https://pypi.python.org/pypi?:action=display&name=pybib
+.. |Code Climate| image:: https://codeclimate.com/github/jgilchrist/pybib/badges/gpa.svg
+   :target: https://codeclimate.com/github/jgilchrist/pybib
+   :alt: Code Climate
