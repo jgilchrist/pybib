@@ -19,7 +19,7 @@ def search_cmd(args):
         return
 
     for i, result in enumerate(results):
-        formatted_result = pybib.format(result)
+        formatted_result = pybib.format_entry(result)
         print('{}. {}'.format(i, formatted_result))
 
 

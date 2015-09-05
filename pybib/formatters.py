@@ -144,7 +144,7 @@ formatters = {
 unknown_formatter = Formatter('Unknown', format_unknown)
 
 
-def format(r):
+def format_entry(r):
     reference_type = r.get('type')
 
     formatter = formatters.get(reference_type) or unknown_formatter
