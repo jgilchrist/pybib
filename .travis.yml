@@ -8,10 +8,10 @@ python:
 
 install:
     - pip install -r requirements.txt
+    - pip install -r dev-requirements.txt
     - pip install coveralls
-    - pip install rednose
 
-script: nosetests --with-coverage --cover-package=pybib --cover-branches --rednose tests
+script: nosetests --with-coverage --cover-package=pybib --cover-branches --rednose -s
 
 after_success:
     coveralls
