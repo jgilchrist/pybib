@@ -1,4 +1,4 @@
-pybib |PyPI version| |Code Climate|
+pybib |Travis CI| |PyPI version| |Code Climate|
 ===================================
 
 pybib is a super-easy way to get citations for your LaTeX document.
@@ -64,6 +64,8 @@ Troubleshooting
 If you encounter any problems, please open an issue so I can rectify
 them as soon as possible.
 
+.. |Travis CI| image:: https://travis-ci.org/jgilchrist/pybib.svg?branch=master
+    :target: https://travis-ci.org/jgilchrist/pybib
 .. |PyPI version| image:: https://img.shields.io/pypi/v/pybib.svg?style=flat
    :target: https://pypi.python.org/pypi?:action=display&name=pybib
 .. |Code Climate| image:: https://codeclimate.com/github/jgilchrist/pybib/badges/gpa.svg
