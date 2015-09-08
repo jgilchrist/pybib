@@ -93,4 +93,5 @@ def test_empty_formats():
         formatters.format_unknown,
     ]
 
-    map(expect_empty_format, empty_formatters)
+    for func in empty_formatters:
+        expect_empty_format(func)
