@@ -2,6 +2,7 @@
 
 import argparse
 import pybib
+import termstyle
 
 def search_cmd(args):
     query = " ".join(args.query)
@@ -26,7 +27,9 @@ def search_cmd(args):
 def get_cmd(args):
     entry = pybib.get_bibtex(args.DOI)
 
+    termstyle.disable()
     print(entry)
+    termstyle.enable()
 
 
 parser = argparse.ArgumentParser(description='Retrieve BibTeX information for Digital Object Identifiers (DOIs)')

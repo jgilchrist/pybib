@@ -6,11 +6,8 @@ import logging
 
 from collections import namedtuple
 
-import termstyle
 from termstyle import red, cyan, green, magenta
 
-# Automatically disable output colors if the output is not a terminal
-termstyle.auto()
 
 # Stores each part of the citation
 Parts = namedtuple('Parts', ['type', 'title', 'authors', 'date', 'container', 'extra', 'doi'])
