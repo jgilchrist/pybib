@@ -25,6 +25,22 @@ mock_entry = {
     'prefix': 'http://id.crossref.org/prefix/test'
 }
 
+def assert_handles_absence(field, expected):
+    mock_entry_without_field = mock_entry.copy()
+    mock_entry_without_field[field] = []
+    formatted_entry = formatters.format_entry(mock_entry_without_field)
+
+    assert_that(formatted_entry, contains_string(expected))
+
+def expect_format(method, expected):
+    parts = formatters.get_common_parts(mock_entry)
+    assert_that(method(mock_entry, parts), equal_to(expected))
+
+def expect_empty_format(method):
+    expect_format(method, '')
+
+
+
 def test_format_entry():
     formatted_entry = formatters.format_entry(mock_entry)
 
@@ -51,72 +67,30 @@ def test_get_common_parts():
     assert_that(parts.doi, equal_to('test.doi.010101'))
 
 def test_handles_title_absence():
-
-    mock_entry_without_title = mock_entry.copy()
-    mock_entry_without_title['title'] = []
-    formatted_entry = formatters.format_entry(mock_entry_without_title)
-
-    assert_that(formatted_entry, contains_string('No Title'))
+    assert_handles_absence('title', expected='No Title')
 
 def test_handles_author_absence():
-
-    mock_entry_without_author = mock_entry.copy()
-    mock_entry_without_author['author'] = []
-    formatted_entry = formatters.format_entry(mock_entry_without_author)
-
-    assert_that(formatted_entry, contains_string('Anonymous'))
+    assert_handles_absence('author', expected='Anonymous')
 
 
 # The following tests are currently placeholders
 
-def test_format_book():
-    parts = formatters.get_common_parts(mock_entry)
-    assert_that(formatters.format_book(mock_entry, parts), equal_to(''))
+def test_empty_formats():
 
-def test_format_book_chapter():
-    parts = formatters.get_common_parts(mock_entry)
-    assert_that(formatters.format_book_chapter(mock_entry, parts), equal_to(''))
+    empty_formatters = [
+        formatters.format_book,
+        formatters.format_book_chapter,
+        formatters.format_component,
+        formatters.format_dataset,
+        formatters.format_dissertation,
+        formatters.format_journal,
+        formatters.format_journal_article,
+        formatters.format_monograph,
+        formatters.format_proceedings_article,
+        formatters.format_reference_entry,
+        formatters.format_report,
+        formatters.format_standard,
+        formatters.format_unknown,
+    ]
 
-def test_format_component():
-    parts = formatters.get_common_parts(mock_entry)
-    assert_that(formatters.format_component(mock_entry, parts), equal_to(''))
-
-def test_format_dataset():
-    parts = formatters.get_common_parts(mock_entry)
-    assert_that(formatters.format_dataset(mock_entry, parts), equal_to(''))
-
-def test_format_dissertation():
-    parts = formatters.get_common_parts(mock_entry)
-    assert_that(formatters.format_dissertation(mock_entry, parts), equal_to(''))
-
-def test_format_journal():
-    parts = formatters.get_common_parts(mock_entry)
-    assert_that(formatters.format_journal(mock_entry, parts), equal_to(''))
-
-def test_format_journal_article():
-    parts = formatters.get_common_parts(mock_entry)
-    assert_that(formatters.format_journal_article(mock_entry, parts), equal_to(''))
-
-def test_format_monograph():
-    parts = formatters.get_common_parts(mock_entry)
-    assert_that(formatters.format_monograph(mock_entry, parts), equal_to(''))
-
-def test_format_proceedings_article():
-    parts = formatters.get_common_parts(mock_entry)
-    assert_that(formatters.format_proceedings_article(mock_entry, parts), equal_to(''))
-
-def test_format_reference_entry():
-    parts = formatters.get_common_parts(mock_entry)
-    assert_that(formatters.format_reference_entry(mock_entry, parts), equal_to(''))
-
-def test_format_report():
-    parts = formatters.get_common_parts(mock_entry)
-    assert_that(formatters.format_report(mock_entry, parts), equal_to(''))
-
-def test_format_standard():
-    parts = formatters.get_common_parts(mock_entry)
-    assert_that(formatters.format_standard(mock_entry, parts), equal_to(''))
-
-def test_format_unknown():
-    parts = formatters.get_common_parts(mock_entry)
-    assert_that(formatters.format_unknown(mock_entry, parts), equal_to(''))
+    map(expect_empty_format, empty_formatters)
