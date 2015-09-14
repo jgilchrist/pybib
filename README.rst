@@ -1,5 +1,5 @@
 pybib |PyPI version| |Travis CI| |Coveralls| |Code Climate|
-===================================
+===========================================================
 
 pybib is a super-easy way to get citations for your LaTeX document.
 Instead of typing out BibTeX entries yourself, just give pybib the
