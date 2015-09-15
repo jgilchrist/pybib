@@ -14,6 +14,10 @@ This project loosely adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][x.x.x]
 
+## [2.2.1]
+### Fixed
+- Stopped using the deprecated 'scripts' in setup.py, preferring 'entry_points'
+
 ## [2.2.0]
 ### Added
 - pybib is now fully compatible with Python 2.x
@@ -93,7 +97,8 @@ This project loosely adheres to [Semantic Versioning](http://semver.org/).
 ## 1.0.0
 - Initial release.
 
-[x.x.x]: https://github.com/jgilchrist/pybib/compare/v2.2.0...HEAD
+[x.x.x]: https://github.com/jgilchrist/pybib/compare/v2.2.1...HEAD
+[2.2.1]: https://github.com/jgilchrist/pybib/compare/v2.2.0...v2.2.1
 [2.2.0]: https://github.com/jgilchrist/pybib/compare/v2.1.0...v2.2.0
 [2.1.0]: https://github.com/jgilchrist/pybib/compare/v2.0.1...v2.1.0
 [2.0.1]: https://github.com/jgilchrist/pybib/compare/v2.0.0...v2.0.1
