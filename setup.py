@@ -18,7 +18,7 @@ setup(name='pybib',
       ],
       entry_points = {
           'console_scripts': [
-              'bib = pybib.main:main'
+              'bib = pybib:main'
           ]
       }
 )
