@@ -3,6 +3,7 @@
 import argparse
 import pybib
 import termstyle
+import sys
 
 def search_cmd(args):
     query = " ".join(args.query)
@@ -50,6 +51,6 @@ args = parser.parse_args()
 
 if not hasattr(args, 'cmd'):
     parser.print_help()
-    exit(1)
+    sys.exit()
 
 args.cmd(args)
