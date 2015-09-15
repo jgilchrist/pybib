@@ -16,4 +16,9 @@ setup(name='pybib',
           'requests',
           'python-termstyle',
       ],
-      scripts=['bin/bib'])
+      entry_points = {
+          'console_scripts': [
+              'bib = pybib.main:main'
+          ]
+      }
+)
