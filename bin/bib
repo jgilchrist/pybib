@@ -34,6 +34,7 @@ def get_cmd(args):
 
 parser = argparse.ArgumentParser(description='Retrieve BibTeX information for Digital Object Identifiers (DOIs)')
 parser.add_argument('--version', action='version', version=pybib.__version__)
+parser.set_defaults(cmd=None)
 
 subparsers = parser.add_subparsers()
 
