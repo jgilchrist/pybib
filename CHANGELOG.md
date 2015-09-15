@@ -14,6 +14,21 @@ This project loosely adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][x.x.x]
 
+## [2.2.0]
+### Added
+- pybib is now fully compatible with Python 2.x
+- The project now has an in-repository changelog.
+
+### Changed
+- pybib is now licensed under the 3-clause BSD license.
+
+### Fixed
+- Fixed a case where different versions of argparse could cause subcommands to
+  fail to override the parent command's default for a value, which could cause
+  no commands to be run.
+- Absence of a title for any entry is now handled gracefully.
+- A case of termstyle.auto() intefering with nosetests output has been rectified.
+- Prefer sys.exit() over exit().
 
 ## [2.1.0]
 ### Added
@@ -78,7 +93,8 @@ This project loosely adheres to [Semantic Versioning](http://semver.org/).
 ## 1.0.0
 - Initial release.
 
-[x.x.x]: https://github.com/jgilchrist/pybib/compare/v2.1.0...HEAD
+[x.x.x]: https://github.com/jgilchrist/pybib/compare/v2.2.0...HEAD
+[2.2.0]: https://github.com/jgilchrist/pybib/compare/v2.1.0...v2.2.0
 [2.1.0]: https://github.com/jgilchrist/pybib/compare/v2.0.1...v2.1.0
 [2.0.1]: https://github.com/jgilchrist/pybib/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/jgilchrist/pybib/compare/v1.3.0...v2.0.0
