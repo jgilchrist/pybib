@@ -7,6 +7,11 @@ Digital Object Identifier (DOI) of the resource you want to cite and it
 will get all the information for you. Then, you can just add the
 citation it gives you to your BibTeX file. Easy!
 
+Demo
+----
+
+|demo|
+
 Installation
 ------------
 
@@ -64,6 +69,8 @@ Troubleshooting
 If you encounter any problems, please open an issue so I can rectify
 them as soon as possible.
 
+.. |demo| image:: https://asciinema.org/a/d28uzeuzswvbzvd1itd5gd1gi.png
+   :target: https://asciinema.org/a/d28uzeuzswvbzvd1itd5gd1gi?autoplay=1
 .. |PyPI version| image:: https://img.shields.io/pypi/v/pybib.svg?style=flat
    :target: https://pypi.python.org/pypi?:action=display&name=pybib
 .. |Travis CI| image:: https://travis-ci.org/jgilchrist/pybib.svg?branch=master
