@@ -1,7 +1,11 @@
+import sys
+# Workaround to make pybib run with Python 2.7 if default encoding is ascii
+if sys.version_info[0] < 3:
+    reload(sys)
+    sys.setdefaultencoding('utf8')
 import argparse
 import pybib
 import termstyle
-import sys
 
 def search_cmd(args):
     query = " ".join(args.query)
