@@ -14,6 +14,10 @@ This project loosely adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][x.x.x]
 
+## [2.2.2]
+### Fixed
+- Fixed Unicode encoding issues in Python 2.x
+
 ## [2.2.1]
 ### Fixed
 - Stopped using the deprecated 'scripts' in setup.py, preferring 'entry_points'
