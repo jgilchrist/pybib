@@ -9,11 +9,5 @@ python:
 install:
     - pip install -r requirements.txt
     - pip install -r requirements-dev.txt
-    - pip install coveralls
-    - pip install codecov
 
 script: nosetests --with-coverage --cover-package=pybib --cover-branches --rednose
-
-after_success:
-    - coveralls
-    - codecov
