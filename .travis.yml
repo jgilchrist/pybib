@@ -8,7 +8,7 @@ python:
     - "3.6"
 
 install:
-    - pip install -r requirements.txt
-    - pip install -r requirements-dev.txt
+    - pip install pipenv
+    - pipenv install --dev
 
-script: nosetests --with-coverage --cover-package=pybib --cover-branches --rednose
+script: pipenv run nosetests --with-coverage --cover-package=pybib --cover-branches --rednose

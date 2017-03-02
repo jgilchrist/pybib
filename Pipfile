@@ -1,0 +1,15 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+
+[packages]
+requests = "*"
+python-termstyle = "*"
+
+[dev-packages]
+coverage = "*"
+requests-mock = "*"
+PyHamcrest = "*"
+green = "*"
+nose = "*"
+rednose = "*"

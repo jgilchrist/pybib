@@ -1,2 +1,0 @@
-python-termstyle==0.1.10
-requests==2.7.0
