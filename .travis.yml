@@ -9,6 +9,7 @@ python:
 
 install:
     - pip install pipenv
+    - pipenv lock
     - pipenv install --dev
 
 script: pipenv run nosetests --with-coverage --cover-package=pybib --cover-branches --rednose
