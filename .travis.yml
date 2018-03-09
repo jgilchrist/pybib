@@ -8,4 +8,4 @@ install:
     - pip install pipenv
     - pipenv install --dev
 
-script: nosetests --with-coverage --cover-package=pybib --cover-branches --rednose
+script: pytest --cov=pybib --cov-branch

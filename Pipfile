@@ -13,9 +13,7 @@ requests = "*"
 
 [dev-packages]
 
-coverage = "*"
-requests-mock = "*"
 pyhamcrest = "*"
-green = "*"
-nose = "*"
-rednose = "*"
+pytest = "*"
+pytest-cov = "*"
+requests-mock = "*"
