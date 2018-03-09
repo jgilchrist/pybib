@@ -28,42 +28,42 @@ def color_parts(parts):
         doi=cyan(parts.doi)
     )
 
+def format_title(title):
+    try:
+        return title[0]
+    except IndexError:
+        return "No Title"
+
+def format_author_list(authors):
+    author_list = []
+
+    if not authors:
+        return "Anonymous"
+
+    for author in authors:
+        given_name = author.get("given", "")
+        family_name = author.get("family", "")
+
+        if given_name:
+            # Only include the first letter of the author's given name
+            given_name = "{}.".format(given_name[0])
+
+        full_name = " ".join([given_name, family_name])
+        author_list.append(full_name)
+
+    return ', '.join(author_list)
+
+def format_container(container_titles):
+    return ', '.join(container_titles)
+
+def format_date(date):
+    date_parts = date.get('date-parts')[0]
+    year = date_parts[0]
+
+    return year
+
 def get_common_parts(r):
     """Gets citation parts which are common to all types of citation"""
-
-    def format_title(title):
-        try:
-            return title[0]
-        except IndexError:
-            return "No Title"
-
-    def format_author_list(authors):
-        author_list = []
-
-        if not authors:
-            return "Anonymous"
-
-        for author in authors:
-            given_name = author.get("given", "")
-            family_name = author.get("family", "")
-
-            if given_name:
-                # Only include the first letter of the author's given name
-                given_name = "{}.".format(given_name[0])
-
-            full_name = " ".join([given_name, family_name])
-            author_list.append(full_name)
-
-        return ', '.join(author_list)
-
-    def format_container(container_titles):
-        return ', '.join(container_titles)
-
-    def format_date(date):
-        date_parts = date.get('date-parts')[0]
-        year = date_parts[0]
-
-        return year
 
     title = format_title(r.get('title'))
     author_list = format_author_list(r.get('author'))
