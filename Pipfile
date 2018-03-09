@@ -17,3 +17,4 @@ pyhamcrest = "*"
 pytest = "*"
 pytest-cov = "*"
 requests-mock = "*"
+"e1839a8" = {path = ".", editable = true}
