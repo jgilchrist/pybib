@@ -14,6 +14,10 @@ This project loosely adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][x.x.x]
 
+## [2.2.4]
+### Changed
+- Updated some package metadata for PyPi
+
 ## [2.2.3]
 ### Changed
 - Switched to colorama instead of python-termstyle
@@ -105,7 +109,8 @@ This project loosely adheres to [Semantic Versioning](http://semver.org/).
 ## 1.0.0
 - Initial release.
 
-[x.x.x]: https://github.com/jgilchrist/pybib/compare/v2.2.3...HEAD
+[x.x.x]: https://github.com/jgilchrist/pybib/compare/v2.2.4...HEAD
+[2.2.4]: https://github.com/jgilchrist/pybib/compare/v2.2.3...v2.2.4
 [2.2.3]: https://github.com/jgilchrist/pybib/compare/v2.2.2...v2.2.3
 [2.2.2]: https://github.com/jgilchrist/pybib/compare/v2.2.1...v2.2.2
 [2.2.1]: https://github.com/jgilchrist/pybib/compare/v2.2.0...v2.2.1
