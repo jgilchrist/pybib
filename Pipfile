@@ -7,8 +7,8 @@ name = "pypi"
 
 [packages]
 
-python-termstyle = "*"
 requests = "*"
+colorama = "*"
 
 
 [dev-packages]

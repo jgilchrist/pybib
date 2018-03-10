@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "0776ad73ce6d7f08b236f7e75c1308537714ef28ab9bc93a3a65a7db32091572"
+            "sha256": "b29e973cdb1f96d9f64e6fdc9853f6f61dd18c51c8b5e320467b5703dc7dd972"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -28,19 +28,19 @@
             ],
             "version": "==3.0.4"
         },
+        "colorama": {
+            "hashes": [
+                "sha256:463f8483208e921368c9f306094eb6f725c6ca42b0f97e313cb5d5512459feda",
+                "sha256:48eb22f4f8461b1df5734a074b57042430fb06e1d61bd1e11b078c0fe6d7a1f1"
+            ],
+            "version": "==0.3.9"
+        },
         "idna": {
             "hashes": [
                 "sha256:2c6a5de3089009e3da7c5dde64a141dbc8551d5b7f6cf4ed7c2568d0cc520a8f",
                 "sha256:8c7309c718f94b3a625cb648ace320157ad16ff131ae0af362c9f21b80ef6ec4"
             ],
             "version": "==2.6"
-        },
-        "python-termstyle": {
-            "hashes": [
-                "sha256:6faf42ba42f2826c38cf70dacb3ac51f248a418e48afc0e36593df11cf3ab1d2",
-                "sha256:f42a6bb16fbfc5e2c66d553e7ad46524ea833872f75ee5d827c15115fafc94e2"
-            ],
-            "version": "==0.1.10"
         },
         "requests": {
             "hashes": [
@@ -84,7 +84,6 @@
                 "sha256:463f8483208e921368c9f306094eb6f725c6ca42b0f97e313cb5d5512459feda",
                 "sha256:48eb22f4f8461b1df5734a074b57042430fb06e1d61bd1e11b078c0fe6d7a1f1"
             ],
-            "markers": "sys_platform == 'win32'",
             "version": "==0.3.9"
         },
         "coverage": {
@@ -183,13 +182,6 @@
                 "sha256:890fe5565400902b0c78b5357004aab1c814115894f4f21370e2433256a3eeec"
             ],
             "version": "==2.5.1"
-        },
-        "python-termstyle": {
-            "hashes": [
-                "sha256:6faf42ba42f2826c38cf70dacb3ac51f248a418e48afc0e36593df11cf3ab1d2",
-                "sha256:f42a6bb16fbfc5e2c66d553e7ad46524ea833872f75ee5d827c15115fafc94e2"
-            ],
-            "version": "==0.1.10"
         },
         "requests": {
             "hashes": [

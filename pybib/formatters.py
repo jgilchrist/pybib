@@ -5,9 +5,7 @@ import sys
 import logging
 
 from collections import namedtuple
-
-from termstyle import red, cyan, green, magenta
-
+from colorama import Fore, Style
 
 # Stores each part of the citation
 Parts = namedtuple('Parts', ['type', 'title', 'authors', 'date', 'container', 'extra', 'doi'])
@@ -24,8 +22,8 @@ template = '{parts.title}\n\t{parts.authors}{parts.extra} ({parts.date}) [{parts
 def color_parts(parts):
     """Adds colors to each part of the citation"""
     return parts._replace(
-        title=green(parts.title),
-        doi=cyan(parts.doi)
+        title=Fore.GREEN + parts.title + Style.RESET_ALL,
+        doi=Fore.CYAN + parts.doi + Style.RESET_ALL
     )
 
 def format_title(title):
@@ -54,6 +52,8 @@ def format_author_list(authors):
     return ', '.join(author_list)
 
 def format_container(container_titles):
+    if container_titles is None:
+        return container_titles
     return ', '.join(container_titles)
 
 def format_date(date):
@@ -123,7 +123,7 @@ def format_standard(r, parts):
     return ''
 
 def format_unknown(r, parts):
-    logging.error(red('Unknown type: "%s"' % r.get('type')))
+    logging.error('{}Unknown type: "{}"'.format(Fore.RED, r.get('type')))
     return ''
 
 

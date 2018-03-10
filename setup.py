@@ -14,7 +14,7 @@ setup(name='pybib',
       packages=['pybib'],
       install_requires=[
           'requests',
-          'python-termstyle',
+          'colorama'
       ],
       entry_points = {
           'console_scripts': [

@@ -1,11 +1,13 @@
 import sys
+
 # Workaround to make pybib run with Python 2.7 if default encoding is ascii
 if sys.version_info[0] < 3:
     reload(sys)
     sys.setdefaultencoding('utf8')
+
 import argparse
+import colorama
 import pybib
-import termstyle
 
 def search_cmd(args):
     query = " ".join(args.query)
@@ -29,10 +31,7 @@ def search_cmd(args):
 
 def get_cmd(args):
     entry = pybib.get_bibtex(args.DOI)
-
-    termstyle.disable()
     print(entry)
-    termstyle.enable()
 
 
 def main():
@@ -55,5 +54,7 @@ def main():
     if not hasattr(args, 'cmd'):
         parser.print_help()
         sys.exit()
+
+    colorama.init()
 
     args.cmd(args)
