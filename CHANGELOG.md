@@ -14,6 +14,10 @@ This project loosely adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][x.x.x]
 
+## [2.2.3]
+### Changed
+- Switched to colorama instead of python-termstyle
+
 ## [2.2.2]
 ### Fixed
 - Fixed Unicode encoding issues in Python 2.x
@@ -101,7 +105,8 @@ This project loosely adheres to [Semantic Versioning](http://semver.org/).
 ## 1.0.0
 - Initial release.
 
-[x.x.x]: https://github.com/jgilchrist/pybib/compare/v2.2.2...HEAD
+[x.x.x]: https://github.com/jgilchrist/pybib/compare/v2.2.3...HEAD
+[2.2.3]: https://github.com/jgilchrist/pybib/compare/v2.2.2...v2.2.3
 [2.2.2]: https://github.com/jgilchrist/pybib/compare/v2.2.1...v2.2.2
 [2.2.1]: https://github.com/jgilchrist/pybib/compare/v2.2.0...v2.2.1
 [2.2.0]: https://github.com/jgilchrist/pybib/compare/v2.1.0...v2.2.0
