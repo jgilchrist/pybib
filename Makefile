@@ -5,7 +5,7 @@ default: build
 
 .PHONY: build
 build:
-	python setup.py bdist_wheel --universal
+	python setup.py bdist_wheel
 
 .PHONY: clean
 clean:
