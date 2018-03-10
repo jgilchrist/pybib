@@ -10,7 +10,7 @@ setup(name='pybib',
       description='Fetch citation information, given a Digital Object Identifier',
       long_description=readme,
       url='https://github.com/jgilchrist/pybib',
-      author='Jonny Gilchrist',
+      author='Jonathan Gilchrist',
       packages=['pybib'],
       install_requires=[
           'requests',
