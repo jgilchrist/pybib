@@ -5,7 +5,7 @@ python:
     - "3.6"
 
 install:
-    - pip install pipenv
-    - pipenv install --dev
+    - pip install poetry
+    - poetry install --develop
 
-script: pytest --cov=pybib --cov-branch
+script: poetry run pytest --cov=pybib --cov-branch
