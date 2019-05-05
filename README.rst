@@ -1,11 +1,11 @@
-pybib |PyPI version| |Travis CI| |Code Climate|
+pybib |PyPI version| |Travis CI|
 ===========================================================
 
-pybib is a super-easy way to get citations for your LaTeX document.
+pybib is an easy way to get citations for your LaTeX document.
 Instead of typing out BibTeX entries yourself, just give pybib the
 Digital Object Identifier (DOI) of the resource you want to cite and it
 will get all the information for you. Then, you can just add the
-citation it gives you to your BibTeX file. Easy!
+citation it gives you to your BibTeX file.
 
 Demo
 ----
@@ -75,5 +75,3 @@ them as soon as possible.
    :target: https://pypi.python.org/pypi?:action=display&name=pybib
 .. |Travis CI| image:: https://travis-ci.org/jgilchrist/pybib.svg?branch=master
     :target: https://travis-ci.org/jgilchrist/pybib
-.. |Code Climate| image:: https://codeclimate.com/github/jgilchrist/pybib/badges/gpa.svg
-   :target: https://codeclimate.com/github/jgilchrist/pybib
