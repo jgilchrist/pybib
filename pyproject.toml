@@ -1,11 +1,12 @@
 [tool.poetry]
 name = "pybib"
 version = "2.3.0"
-description = "'Fetch BibTeX citation information, given a Digital Object Identifier'"
+description = "Fetch BibTeX citation information, given a Digital Object Identifier"
 authors = ["Jonathan Gilchrist <jonathan.gilchrist@factset.com>"]
 homepage = "https://jgilchrist.github.io/pybib/"
 repository = "https://github.com/jgilchrist/pybib"
 license = "BSD-3-Clause"
+readme = "README.rst"
 
 [tool.poetry.dependencies]
 # python = "^3.6"
