@@ -1,4 +1,4 @@
-pybib |PyPI version| |Travis CI|
+pybib |PyPI version|
 ===========================================================
 
 pybib is an easy way to get citations for your LaTeX document.
@@ -73,5 +73,3 @@ them as soon as possible.
    :target: https://asciinema.org/a/d28uzeuzswvbzvd1itd5gd1gi?autoplay=1
 .. |PyPI version| image:: https://img.shields.io/pypi/v/pybib.svg?style=flat
    :target: https://pypi.python.org/pypi?:action=display&name=pybib
-.. |Travis CI| image:: https://travis-ci.org/jgilchrist/pybib.svg?branch=master
-    :target: https://travis-ci.org/jgilchrist/pybib
