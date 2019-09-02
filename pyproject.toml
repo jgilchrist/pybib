@@ -17,7 +17,7 @@ colorama = "^0.4.1"
 pyhamcrest = "^1.9"
 pytest = "^4.6"
 pytest-cov = "^2.7"
-requests-mock = "^1.6"
+requests-mock = "^1.7"
 
 [tool.poetry.scripts]
 bib = "pybib:main"
