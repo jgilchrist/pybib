@@ -14,7 +14,7 @@ requests = "^2.21"
 colorama = "^0.4.1"
 
 [tool.poetry.dev-dependencies]
-pyhamcrest = "^1.9"
+pyhamcrest = "^1.10"
 pytest = "^4.6"
 pytest-cov = "^2.8"
 requests-mock = "^1.7"
