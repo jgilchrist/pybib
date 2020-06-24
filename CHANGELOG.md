@@ -14,7 +14,11 @@ This project loosely adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][x.x.x]
 
-## [2.3.0]
+## [2.3.2]
+### Fixed
+- Dependency upgrades
+
+## [2.3.1]
 ### Fixed
 - Fixed the build, which was still using `pipenv`
 - Fixed pypi.org not picking up the README
@@ -118,7 +122,8 @@ This project loosely adheres to [Semantic Versioning](http://semver.org/).
 ## 1.0.0
 - Initial release.
 
-[x.x.x]: https://github.com/jgilchrist/pybib/compare/v2.3.1...HEAD
+[x.x.x]: https://github.com/jgilchrist/pybib/compare/v2.3.2...HEAD
+[2.3.2]: https://github.com/jgilchrist/pybib/compare/v2.3.1...v2.3.2
 [2.3.1]: https://github.com/jgilchrist/pybib/compare/v2.3.0...v2.3.1
 [2.3.0]: https://github.com/jgilchrist/pybib/compare/v2.2.4...v2.3.0
 [2.2.4]: https://github.com/jgilchrist/pybib/compare/v2.2.3...v2.2.4
